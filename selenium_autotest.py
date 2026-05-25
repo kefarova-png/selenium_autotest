@@ -10,6 +10,8 @@ from selenium.webdriver.common.by import By
 options = webdriver.ChromeOptions()
 #  Пишем в опции: detach, True -- чтобы Chrome не закрывал окно браузера после завершения работы кода
 options.add_experimental_option("detach",True)
+
+
 #  Создаём вебдрайвер Chrome, с автоматической проверкой/установкой драйвера и c настройками, которые в options
 driver = webdriver.Chrome(
     service=ChromeService(ChromeDriverManager().install()),
@@ -20,19 +22,16 @@ driver.get('https://app.imyx.ru/auth')
 #  Устанавливаем размер окна
 driver.set_window_size(1920,1080)
 
-#  Находим элемент для логина, используя XPATH
-user_name = driver.find_element(By.XPATH, "/html/body/div[1]/div/main/div/div/form/div[1]/input")
-user_name.send_keys("not_office@mail.ru")  #  Вводим в поле логин "not_office@mail.ru"
+#  Находим элемент для логина, используя XPATH, и Вводим в поле логин "not_office@mail.ru"
+driver.find_element(By.XPATH, "/html/body/div[1]/div/main/div/div/form/div[1]/input").send_keys("not_office@mail.ru")
 print('Login input')
 
-#  Находим элемент для пароля, используя XPATH
-user_password = driver.find_element(By.XPATH, "/html/body/div[1]/div/main/div/div/form/div[2]/div/input")
-user_password.send_keys("Shur_1234")  #  Вводим в поле пароль "Shur_1234"
+#  Находим элемент для пароля, используя XPATH, и Вводим в поле пароль "Shur_1234"
+driver.find_element(By.XPATH, "/html/body/div[1]/div/main/div/div/form/div[2]/div/input").send_keys("Shur_1234")
 print('Password input')
 
 #  Найдём и нажмём кнопку входа
-button_for_login = driver.find_element(By.XPATH, "/html/body/div[1]/div/main/div/div/form/button")
-button_for_login.click()
+driver.find_element(By.XPATH, "/html/body/div[1]/div/main/div/div/form/button").click()
 print('Login button click')
 
 # Выведем текущий URL и сравним его с ожидаемым
